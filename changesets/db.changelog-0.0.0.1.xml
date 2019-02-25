@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    <changeSet author="authorName" id="changelog-1.0">
+        <createTable tableName="C_PRUEBA">
+            <column name="ID" type="INT">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+            <column name="DS_NAME" type="VARCHAR(50)">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Ivan Equihua" id="20190222-1">
+        <addColumn tableName="C_PRUEBA">
+            <column name="DS_AGE" type="INT"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="Ivan Equihua" id="20190222-2">
+        <createTable tableName="Ivan.Equihua">
+            <column name="jaja_salu2" type="BIT"/>
+            <column name="ya_es_toda_wey" type="VARCHAR(25)"/>
+        </createTable>
+    </changeSet>
+
+
+
+
+</databaseChangeLog> 

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+
+    <changeSet author="Ivan Herrera Equihua" id="20190224-1">
+        <createTable tableName="role">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="type" type="varchar(10)"/>
+            <column name="level" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Ivan Herrera Equihua" id="20190224-2">
+        <createTable tableName="pages">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)"/>
+            <column name="description" type="varchar(254)"/>
+        </createTable>
+    </changeSet>
+
+
+    <!-- <changeSet author="Ivan Herrera Equihua" id="20190224-3">
+        <addAutoIncrement columnDataType="int"
+         columnName="id"
+          incrementBy="1"
+           schemaName="public"
+            startWith="100"
+             tableName="pages"/>
+    </changeSet> -->
+
+
+    <changeSet author="Ivan Herrera Equihua" id="20190224-4">
+        <createTable tableName="junction_role_pages">
+            <column name="role_id" type="int"/>
+            <column name="pages_id" type="int"/>
+        </createTable>
+    </changeSet>
+
+
+<!-- #TODO search up junction tables in liquibase -->
+    <changeSet author="Ivan Herrera Equihua" id="20190224-5A">
+        <addForeignKeyConstraint baseColumnNames="role_id"
+         baseTableName="junction_role_pages"
+          constraintName="fk_junctionRP_role"
+           referencedColumnNames="id"
+            referencedTableName="role"/>
+    </changeSet>
+
+    <changeSet author="Ivan Herrera Equihua" id="20190224-5B">
+        <addForeignKeyConstraint baseColumnNames="pages_id"
+         baseTableName="junction_role_pages"
+          constraintName="fk_junctionRP_pages"
+           referencedColumnNames="id"
+            referencedTableName="pages"/>
+    </changeSet>
+
+
+    <changeSet author="Ivan Herrera Equihua" id="20190224-6">
+        <createTable tableName="address">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="street" type="varchar(254)"/>
+            <column name="number" type="varchar(100)"/>
+            <column name="city_id" type="int"/>
+            <column name="state_id" type="int"/>
+            <column name="country_id" type="int"/>
+            <column name="cp" type="varchar(6)"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="Ivan Herrera Equihua" id="20190224-7">
+        <createTable tableName="country">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="Ivan Herrera Equihua" id="20190224-8">
+        <createTable tableName="state">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)"/>
+            <column name="country_id" type="INT"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="Ivan Herrera Equihua" id="20190224-9">
+        <createTable tableName="city">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(100)"/>
+            <column name="state_id" type="INT"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet author="Ivan Herrera Equihua" id="20190224-10">
+        <createTable tableName="user">
+            <column name="id" type="INT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(254)"/>
+            <column name="lastname" type="varchar(100)"/>
+            <column name="age" type="varchar(254)"/>
+            <column name="address_id" type="int"/>
+            <column name="username" type="varchar(30)"/>
+            <column name="password" type="varchar(30)"/>
+            <column name="role_id" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <!-- foreign keys constraints -->
+    <changeSet author="Ivan Herrera Equihua" id="20190224-11">
+        <addForeignKeyConstraint baseColumnNames="country_id"
+         baseTableName="state"
+          constraintName="fk_state_country"
+           referencedColumnNames="id"
+            referencedTableName="country"/>
+    </changeSet>
+
+    <changeSet author="Ivan Herrera Equihua" id="20190224-12">
+        <addForeignKeyConstraint baseColumnNames="state_id"
+         baseTableName="city"
+          constraintName="fk_city_state"
+           referencedColumnNames="id"
+            referencedTableName="state"/>
+    </changeSet>
+
+        <changeSet author="Ivan Herrera Equihua" id="20190224-13">
+        <addForeignKeyConstraint baseColumnNames="country_id"
+         baseTableName="address"
+          constraintName="fk_address_country"
+           referencedColumnNames="id"
+            referencedTableName="country"/>
+    </changeSet>
+
+        <changeSet author="Ivan Herrera Equihua" id="20190224-14">
+        <addForeignKeyConstraint baseColumnNames="state_id"
+         baseTableName="address"
+          constraintName="fk_address_state"
+           referencedColumnNames="id"
+            referencedTableName="state"/>
+    </changeSet>
+
+        <changeSet author="Ivan Herrera Equihua" id="20190224-15">
+        <addForeignKeyConstraint baseColumnNames="city_id"
+         baseTableName="address"
+          constraintName="fk_address_city"
+           referencedColumnNames="id"
+            referencedTableName="city"/>
+    </changeSet>
+
+            <changeSet author="Ivan Herrera Equihua" id="20190224-16">
+        <addForeignKeyConstraint baseColumnNames="address_id"
+         baseTableName="user"
+          constraintName="fk_user_addres"
+           referencedColumnNames="id"
+            referencedTableName="address"/>
+    </changeSet>
+
+            <changeSet author="Ivan Herrera Equihua" id="20190224-17">
+        <addForeignKeyConstraint baseColumnNames="role_id"
+         baseTableName="user"
+          constraintName="fk_user_role"
+           referencedColumnNames="id"
+            referencedTableName="role"/>
+    </changeSet>
+
+</databaseChangeLog> 
