@@ -48,7 +48,6 @@
             <column name="address_id" type="int"/>
             <column name="username" type="varchar(30)"/>
             <column name="password" type="varchar(30)"/>
-            <column name="role_id" type="int"/>
         </createTable>
     </changeSet>
 
