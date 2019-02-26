@@ -1,6 +1,6 @@
-#La mera existencia es sufrimiento
+# La mera existencia es sufrimiento
 
-#ya matenmennnnnnnnnnnnnnnnnnnn
+# ya matenmennnnnnnnnnnnnnnnnnnn
 
 
 # Liquibase
