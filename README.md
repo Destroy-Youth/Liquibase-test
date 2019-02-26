@@ -1,3 +1,6 @@
+#La mera existencia es sufrimiento
+
+
 # Liquibase
 ## Source Control for your database
 
